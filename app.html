@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Title</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="sty01.css">
+</head>
+<body>
+<div class="container-fluid">
+
+    <div class="raw" id="top-banner">
+        <h1>电池计算</h1>
+    </div>
+    <form name="form1">
+        <div class="form-group">
+            <label for="upsinpower" class="form-tic">ups视在功率</label>
+            <input name="upspower" type="text" class="form-control" id="upsinpower" required>
+        </div>
+        <div class="form-group">
+        <div class="form-tic">负载率</div>
+        <select class="form-control" name="onload">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <div class="form-tic">ups输出功率因数</div>
+        <select class="form-control" name="upsoutnum">
+            <option>0.9</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <div class="form-tic">ups逆变器效率</div>
+        <select class="form-control" name="upsinvertnum">
+            <option>0.95</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+        </div>
+        <div class="form-group">
+            <label for="upsDC" class="form-tic">vdc直流电压（V）</label>
+            <input name="vdc" type="text" class="form-control" id="upsDC" required>
+        </div>
+        <div class="form-group">
+            <label for="btrsinV" class="form-tic">单体电压</label>
+            <input name="simpdc" type="text" class="form-control" id="btrsinV" required>
+        </div>
+        <button type="button" class="btn btn-default culbut">计算</button>
+        <button type="reset" class="btn btn-default cinset">清除</button>
+        <div class="form-tic">每个电池提供功率</div>
+        <div class="w-ans"></div>
+        <div class="form-tic">电池数</div>
+        <div id="btrNum"></div>
+        <div class="checkbox">
+            <div class="form-tic">品牌</div>
+            <label class="radio-inline">
+                <input class="paicheckbox" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="pp1-table"> 松下
+            </label>
+            <label class="radio-inline">
+                <input class="paicheckbox" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="pp2-table"> 品牌1
+            </label>
+            <label class="radio-inline">
+                <input class="paicheckbox" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="pp3-table"> 品牌2
+            </label>
+        </div>
+        <div class="form-group">
+        <div class="form-tic">系列</div>
+        <select name="btrtype" class="pinpai-control form-control">
+
+        </select>
+        </div>
+        <div class="form-group">
+        <div class="form-tic">截止电压</div>
+        <select name="offdc" class="form-control">
+            <option>电压1</option>
+            <option>电压2</option>
+            <option>电压3</option>
+            <option>电压4</option>
+            <option>电压5</option>
+        </select>
+        </div>
+        <div class="form-tic">放电时间</div>
+        <select name="dctime" class="form-control">
+            <option>5min</option>
+            <option>10min</option>
+            <option>15min</option>
+            <option>20min</option>
+            <option>30min</option>
+            <option>90min</option>
+        </select>
+
+
+        <button type="button" class="findcul">寻找合适系列</button>
+        <div class="info1"></div>
+        <button type="button" class="findcul1">其他功能（空）</button>
+        <div class="table-responsive table-bordered">
+            <table class="table pp1-table">
+                <thead>
+                    <tr>
+                        <th>松下系列</th>
+                        <th>5min</th>
+                        <th>10min</th>
+                        <th>15min</th>
+                        <th>20min</th>
+                        <th>30min</th>
+                        <th>90min</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="lc-p127r2">
+                        <th>lc-p127r2</th>
+                        <th>37.17</th>
+                        <th>27.33</th>
+                        <th>23</th>
+                        <th>19.17</th>
+                        <th>14.53</th>
+                        <th>1</th>
+                    </tr>
+                    <tr class="lc-pa1212">
+                        <th>lc-pa1212</th>
+                        <th>72.33</th>
+                        <th>53.50</th>
+                        <th>43.50</th>
+                        <th>137.50</th>
+                        <th>27.67</th>
+                        <th>1</th>
+                    </tr>
+                    <tr class="lc-pa1216">
+                        <th>lc-pa1216</th>
+                        <th>86.67</th>
+                        <th>58.33</th>
+                        <th>46.83</th>
+                        <th>39.67</th>
+                        <th>29.67</th>
+                        <th>1</th>
+                    </tr>
+                    <tr class="lc-pd1217">
+                        <th>lc-pd1217</th>
+                        <th>93.50</th>
+                        <th>69.17</th>
+                        <th>56.50</th>
+                        <th>50.17</th>
+                        <th>38.67</th>
+                        <th>1</th>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table pp2-table">
+                <thead>
+                <tr>
+                    <th>品牌1系列</th>
+                    <th>5min</th>
+                    <th>10min</th>
+                    <th>15min</th>
+                    <th>20min</th>
+                    <th>30min</th>
+                    <th>90min</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="lc1-p127r2">
+                    <th>1lc-p127r2</th>
+                    <th>37.17</th>
+                    <th>27.33</th>
+                    <th>23</th>
+                    <th>19.17</th>
+                    <th>14.53</th>
+                    <th>1</th>
+                </tr>
+                <tr class="lc1-pa1212">
+                    <th>1lc-pa1212</th>
+                    <th>72.33</th>
+                    <th>53.50</th>
+                    <th>43.50</th>
+                    <th>137.50</th>
+                    <th>27.67</th>
+                    <th>1</th>
+                </tr>
+                <tr class="lc1-pa1216">
+                    <th>1lc-pa1216</th>
+                    <th>86.67</th>
+                    <th>58.33</th>
+                    <th>46.83</th>
+                    <th>39.67</th>
+                    <th>29.67</th>
+                    <th>1</th>
+                </tr>
+                <tr class="lc1-pd1217">
+                    <th>1lc-pd1217</th>
+                    <th>93.50</th>
+                    <th>69.17</th>
+                    <th>56.50</th>
+                    <th>50.17</th>
+                    <th>38.67</th>
+                    <th>1</th>
+                </tr>
+                </tbody>
+            </table>
+            <table class="table pp3-table">
+                <thead>
+                <tr>
+                    <th>品牌2系列</th>
+                    <th>5min</th>
+                    <th>10min</th>
+                    <th>15min</th>
+                    <th>20min</th>
+                    <th>30min</th>
+                    <th>90min</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="lc2-p127r2">
+                    <th>lc2-p127r2</th>
+                    <th>37.17</th>
+                    <th>27.33</th>
+                    <th>23</th>
+                    <th>19.17</th>
+                    <th>14.53</th>
+                    <th>1</th>
+                </tr>
+                <tr class="lc2-pa1212">
+                    <th>lc2-pa1212</th>
+                    <th>72.33</th>
+                    <th>53.50</th>
+                    <th>43.50</th>
+                    <th>137.50</th>
+                    <th>27.67</th>
+                    <th>1</th>
+                </tr>
+                <tr class="lc2-pa1216">
+                    <th>lc2-pa1216</th>
+                    <th>86.67</th>
+                    <th>58.33</th>
+                    <th>46.83</th>
+                    <th>39.67</th>
+                    <th>29.67</th>
+                    <th>1</th>
+                </tr>
+                <tr class="lc2-pd1217">
+                    <th>lc2-pd1217</th>
+                    <th>93.50</th>
+                    <th>69.17</th>
+                    <th>56.50</th>
+                    <th>50.17</th>
+                    <th>38.67</th>
+                    <th>1</th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+    <div class="success info"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script>
+    class BtyCulData {
+        constructor(w, n, p, q) {
+            this.w = 0
+            this.cosp = 0
+        }
+    }
+    let btycil = new BtyCulData()
+    const getform1value = () => {
+        let lanmuda = []
+        let a = document.form1
+        lanmuda.push(a.upspower.value, a.onload.value, a.upsoutnum.value, a.upsinvertnum.value, a.vdc.value, a.simpdc.value, a.inlineRadioOptions.value, a.btrtype.value, a.offdc.value, a.dctime.value)
+        log('输出表格数据', lanmuda)
+        s = parseFloat(lanmuda[0])
+        // 负载率
+        b = parseFloat(lanmuda[1])
+        c = parseFloat(lanmuda[2])
+        x = parseFloat(lanmuda[3])
+        z = parseFloat(lanmuda[4])
+        v = parseFloat(lanmuda[5])
+        log('aaa', typeof(s))
+        // 公式1计算w/cell
+        // 公式1计算w/cell
+        // 公式1计算w/cell
+        // 公式1计算w/cell
+        // 公式1计算w/cell
+        let w = s * c / (0.5 * x * z)
+        // 公式1计算w/cell
+        // 公式1计算w/cell
+        // 公式1计算w/cell
+        // 公式1计算w/cell
+        log('W/cell = ', w)
+        // 公式2计算电池数
+        // 计算电池数
+        // 计算电池数
+        // 计算电池数
+        // 计算电池数
+        let n = z / v
+        n = parseInt(n) + 1
+        log('n = ', n)
+        e('.w-ans').innerHTML = ''
+        e('#btrNum').innerHTML = ''
+        e('.w-ans').insertAdjacentHTML('afterbegin', 'W = ' + w)
+        e('#btrNum').insertAdjacentHTML('afterbegin', 'n = ' + n)
+        btycil.w = w
+        btycil.n = n
+        log('w, n', w, n)
+    }
+    // 高亮目标行
+    const hightLightTable = () => {
+        let a = document.form1.btrtype.value
+        let b = btycil.w
+        let type = '.' + a
+        log('b = ', b)
+        log('type = ', type)
+        e(type).classList.add('success')
+    }
+    // 计算出合适系列高亮目标
+    const hightLightTableh = () => {
+        // 放电时间
+        let a = document.form1.dctime.value
+        let n = 0
+        // 品牌
+        let b = document.form1.inlineRadioOptions.value
+        let pp = '.' + b
+        switch (a) {
+            case '5min':
+                n = 1
+                break
+            case '10min':
+                n = 2
+                break
+            case '15min':
+                n = 3
+                break
+            case '20min':
+                n = 4
+                break
+            case '30min':
+                n = 5
+                break
+            case '90min':
+                n = 6
+                break
+            default:
+                null
+        }
+        log('n = 行数', n)
+        // 找到表格
+        let tab = findtableinf(pp, n)
+        log('tab = ', tab, 'w = ', btycil.w)
+        let q = findarrmin(btycil.w, tab)
+        e(pp).rows[q].cells[n].classList.add('info')
+        log('sss=', tab,'q =', q)
+    }
+    // 返回目标表格列元素行数据
+    const findtableinf = (pp, cells) => {
+        let a = e(pp)
+        let ans = []
+        for (let i = 1; i < a.rows.length; i++) {
+            ans.push(parseFloat(a.rows[i].cells[cells].innerText))
+            log('mmmmmm = ', a.rows[i].cells[cells].innerText)
+        }
+        return ans.sort()
+    }
+    // 数组中找到比参数大的最小数下标
+    const findarrmin = (input, arr) => {
+
+        for (let i = 0; i < arr.length; i++) {
+            if (input < arr[i]) {
+                return i + 1
+            }
+        }
+        return 1
+    }
+    // 清除以高亮行列
+    const hightLightTableOff = () => {
+        let a = es('.success')
+        for (let i = 0; i < a.length; i++) {
+            a[i].classList.remove('success')
+        }
+        // let b = es('.info')
+        // for (let i = 0; i < b.length; i++) {
+        //     b[i].classList.remove('info')
+        // }
+    }
+    const log = console.log.bind(console)
+    const e = function(selector) {
+        let element = document.querySelector(selector)
+        if (element === null) {
+            let s = `selector ${selector} not found`
+            alert(s)
+            //
+            return null
+        } else {
+            return element
+        }
+    }
+
+    // es 返回一个数组，包含所有被选中的元素
+    const es = function(selector) {
+        let elements = document.querySelectorAll(selector)
+        if (elements.length === 0) {
+            let s = `selector ${selector} not found`
+            alert(s)
+            //
+            return []
+        } else {
+            return elements
+        }
+    }
+    // 找到所有指定子元素
+    const findallchildren = (element, classname) => {
+        let b = []
+        let a = element.children
+        for (let i = 0; i < a.length; i++) {
+            if (a[i].id == classname) {
+                b.push(a[i])
+            } else {
+                null
+            }
+        }
+        return b
+    }
+    // log('555', findallchildren(e('.pinpai-control'), 'inlineRadio2'))
+    // 根据选择的品牌自动清除其他品牌系列的函数
+    const changeType = () => {
+        let a = es('.paicheckbox')
+        for (i = 0; i < a.length; i++) {
+            if (a[i].checked == true) {
+                null
+            } else {
+                // log('555', findallchildren(e('.pinpai-control'), a[i].id))
+                // log('333', e('.pinpai-control'), a[i].id, typeof(a[i].id))
+                // log('222',findallchildren(e('.pinpai-control'), a[i].id))
+                // e('.pinpai-control').removeChild(findallchildren(e('.pinpai-control'), a[i].id))
+                // log('444', findallchildren(e('.pinpai-control'), 'inlineRadio2'))
+                b = findallchildren(e('.pinpai-control'), a[i].id)
+                for (let j = 0; j < b.length; j++) {
+                    b[j].remove()
+                }
+            }
+
+        }
+    }
+    // 增加列表
+    const onstateType = () => {
+        e('.pinpai-control').insertAdjacentHTML('afterbegin',
+            '            <option id="inlineRadio1">lc-p127r2</option>\n' +
+            '            <option id="inlineRadio1">lc-pa1212</option>\n' +
+            '            <option id="inlineRadio1">lc-pa1216</option>\n' +
+            '            <option id="inlineRadio1">lc-pd1217</option>\n' +
+            '            <option id="inlineRadio2">lc1-p127r2</option>\n' +
+            '            <option id="inlineRadio2">lc1-pa1212</option>\n' +
+            '            <option id="inlineRadio2">lc1-pa1216</option>\n' +
+            '            <option id="inlineRadio2">lc1-pd1217</option>\n' +
+            '            <option id="inlineRadio3">lc2-p127r2</option>\n' +
+            '            <option id="inlineRadio3">lc2-pa1212</option>\n' +
+            '            <option id="inlineRadio3">lc2-pa1216</option>\n' +
+            '            <option id="inlineRadio3">lc2-pd1217</option>')
+    }
+    // 监听checkbox
+    const oncheckbox = () => {
+
+        let a = es('.paicheckbox')
+        for (let i = 0; i < a.length; i++) {
+            a[i].addEventListener('click', function(event) {
+                // log('111', a[i])
+                onstateType()
+                changeType()
+
+            })
+        }
+    }
+    const onchousepp = () => {
+        let a = document.form1.inlineRadioOptions.value
+        switch (a) {
+            case 'pp1-table':
+                e('.pp1-table').style.display = 'table'
+                e('.pp2-table').style.display = 'none'
+                e('.pp3-table').style.display = 'none'
+                log('sheng1')
+                break
+            case 'pp2-table':
+                e('.pp1-table').style.display = 'none'
+                e('.pp2-table').style.display = 'table'
+                e('.pp3-table').style.display = 'none'
+                log('sheng2')
+                break
+            case 'pp3-table':
+                e('.pp1-table').style.display = 'none'
+                e('.pp2-table').style.display = 'none'
+                e('.pp3-table').style.display = 'table'
+                log('sheng3')
+                break
+            default:
+                null
+
+        }
+    }
+    const onclick = () => {
+        e('.btn').addEventListener('click', function(event) {
+            getform1value()
+
+
+        })
+    }
+    const onclickcul = () => {
+        e('.findcul').addEventListener('click', function(event) {
+            onchousepp()
+            hightLightTableOff()
+            hightLightTableh()
+            hightLightTable()
+        })
+    }
+    const onclickcul1 = () => {
+        e('.findcul1').addEventListener('click', function(event) {
+            null
+        })
+    }
+    // 入口
+    const main = function() {
+        oncheckbox()
+        onclick()
+        onclickcul()
+
+    }
+
+    main()
+</script>
+</body>
+</html>
