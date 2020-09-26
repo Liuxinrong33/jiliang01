@@ -140,7 +140,7 @@ if __name__ == '__main__':
     # 生成配置并且运行程序
     config = dict(
         host='',
-        port=3000,
+        port=80,
     )
     # 如果不了解 **kwargs 的用法, 群里问或者看书/搜索 关键字参数
     run(**config)
